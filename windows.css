@@ -2,13 +2,14 @@
     padding: 0;
     margin: 0;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI';
+    user-select: none;
 }
 
 body {
-    background: url(./imgs/bg.png);
-    background-size:     cover;
-    background-repeat:   no-repeat;
+    background: url(./imgs/bg.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
     overflow: hidden;
 }
 
@@ -17,16 +18,19 @@ body {
     height: calc(100vh - 20px);
     padding: 10px;
     position: relative;
-    display: none;
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: .3s;
 }
 
 .lock-screen.open {
-    display: block;
+    opacity: 1;
+    transform: translateY(0px);
 }
 
 .lock-screen .content {
     position: absolute;
-    bottom: 30px;
+    bottom: 70px;
     left: 40px;
 }
 
@@ -40,18 +44,24 @@ body {
 
 
 
+
+
 .login-screen {
     width: 100vw;
-    height: 100vh;
-    backdrop-filter: blur(10px);
+    height: 120vh;
+    background: rgba(0, 0, 0, 0.548);
     position: absolute;
     top: 0px;
     left: 0px;
-    display: none;
+    opacity: 0;
+    transition: .3s;
+    transform: translateY(100px);
 }
 
 .login-screen.open {
-    display: block;
+    height: 100vh;
+    opacity: 1;
+    transform: translateY(0px);
 }
 
 .login-screen .users {
@@ -62,11 +72,20 @@ body {
 
 .login-screen .users .user {
     width: 220px;
+    margin-bottom: 10px;
     padding: 5px 10px;
 }
 
+.login-screen .users .user.active {
+    background: #005599;
+}
+
+.login-screen .users .user:active * {
+    transform: scale(0.95);
+}
+
 .login-screen .users .user:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(116, 116, 116, 0.37);
 }
 
 .login-screen .users .user * {
@@ -87,7 +106,7 @@ body {
 
 .login-screen .form {
     position: absolute;
-    top: 50%;
+    top: 43%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -98,17 +117,180 @@ body {
     margin-bottom: 20px;
 }
 
+.login-screen form * {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.login-screen form .icon {
+    background: gray;
+    padding-top: 5px;
+    transform: translateY(20px) translateX(-5px);
+    height: 25px;
+    width: 30px;
+}
+
 .login-screen .form input {
-    /* Design it to look like windows 10 input feild */
-    width: 100%;
+    width: 350px;
     padding: 4px 8px;
     font-size: 16px;
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    background-color: rgba(255, 255, 255, 0.18);
+    border: 2px solid rgb(116, 116, 116);
+    background-color: rgba(0, 0, 0, 0.349);
     color: white;
     outline: none;
+    margin-top: 20px;
+}
+
+.login-screen .form input:hover+.icon {
+    background: rgb(190, 190, 190);
+    color: black;
+}
+
+.login-screen .form input:hover {
+    border: 2px solid rgb(190, 190, 190);
+    background-color: rgba(0, 0, 0, 0.527);
+}
+
+.login-screen .form input:focus {
+    background: white;
+    color: black;
+}
+
+.login-screen .form input:focus::placeholder {
+    color: gray;
 }
 
 .login-screen .form input::placeholder {
     color: white;
+}
+
+.login-screen .options {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.login-screen .options .option {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    margin: 5px 1px;
+}
+
+.login-screen .options .option:hover {
+    background: rgba(116, 116, 116, 0.37);
+}
+
+.login-screen .options .option img {
+    width: 40px;
+}
+
+.login-screen .options .option:active img {
+    transform: scale(0.9);
+}
+
+
+
+
+
+
+.loader {
+    transform: translateX(-20px);
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+.loader .circle {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    opacity: 0;
+    transform: rotate(225deg);
+    animation-iteration-count: infinite;
+    animation-name: orbit;
+    animation-duration: 5.5s;
+}
+
+.loader .circle:after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.loader .circle:nth-child(2) {
+    animation-delay: 240ms;
+}
+
+.loader .circle:nth-child(3) {
+    animation-delay: 480ms;
+}
+
+.loader .circle:nth-child(4) {
+    animation-delay: 720ms;
+}
+
+.loader .circle:nth-child(5) {
+    animation-delay: 960ms;
+}
+
+.loader .bg {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 13px;
+    animation: bgg 16087ms ease-in alternate infinite;
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(225deg);
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+
+    7% {
+        transform: rotate(345deg);
+        animation-timing-function: linear;
+    }
+
+    30% {
+        transform: rotate(455deg);
+        animation-timing-function: ease-in-out;
+    }
+
+    39% {
+        transform: rotate(690deg);
+        animation-timing-function: linear;
+    }
+
+    70% {
+        transform: rotate(815deg);
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+
+    75% {
+        transform: rotate(945deg);
+        animation-timing-function: ease-out;
+    }
+
+    76% {
+        transform: rotate(945deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(945deg);
+        opacity: 0;
+    }
+}
+
+.death {
+    width: 100vw;
+    height: 100vh;  
+    background: black;
 }

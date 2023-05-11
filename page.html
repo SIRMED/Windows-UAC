@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Windows Password</title>
     <link rel="stylesheet" href="windows.css">
 </head>
+
 <body>
 
     <div class="lock-screen open" id="lock-screen">
@@ -20,7 +22,7 @@
 
     <div class="login-screen" id="login-screen">
         <div class="users">
-            <div class="user">
+            <div class="user active">
                 <img src="./imgs/user.jfif">
                 <p>BahawalPur House</p>
             </div>
@@ -33,11 +35,29 @@
         <div class="form">
             <img src="./imgs/user.jfif">
             <h1>BahawalPur House</h1>
-            <input type="password" placeholder="Password">
+            <form id="form">
+                <input type="password" placeholder="Password" id="pass">
+                <div class="icon">
+                    →
+                </div>
+            </form>
+        </div>
+
+        <div class="options">
+            <div class="option">
+                <img src="./imgs/options/power off.png" alt="">
+            </div>
+            <div class="option">
+                <img src="./imgs/options/accesibility.png" alt="">
+            </div>
+            <div class="option">
+                <img src="./imgs/options/wifi.png" alt="">
+            </div>
         </div>
     </div>
 
 
-    <script src="script.js"></script>    
+    <script src="script.js"></script>
 </body>
+
 </html>
