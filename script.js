@@ -1,13 +1,14 @@
 document.addEventListener("click", () => {
-    document.getElementById("lock-screen")?.classList.remove("open")
-    document.getElementById("login-screen")?.classList.add("open")
-    setTimeout(() => {
-        document.getElementById("pass").focus()
-    }, 200);
+    if(document.getElementById("lock-screen").classList.contains("open")) {
+        document.getElementById("lock-screen")?.classList.remove("open")
+        document.getElementById("login-screen")?.classList.add("open")
+        setTimeout(() => {
+            document.getElementById("pass").focus()
+        }, 200);
+    }
 })
 
 document.addEventListener("keydown", (e) => {
-    console.log(e)
     if(document.getElementById("lock-screen").classList.contains("open")) {
         document.getElementById("lock-screen")?.classList.remove("open")
         document.getElementById("login-screen")?.classList.add("open")
@@ -66,8 +67,8 @@ function checkScreen() {
 }
 
 setTimeout(() => {
-    alert("Collatrel has started")
-    checkScreen()
+    // alert("Collatrel has started")
+    // checkScreen()
 }, 5000);
 
 document.querySelectorAll(".shutdown").forEach((element) => {
@@ -162,7 +163,7 @@ function updateTime() {
         minutes = `0${minutes}`
     } 
 
-    dateEle.innerHTML = `${monthNumberToText(month)} ${date}, ${year}`
+    dateEle.innerHTML = `${dayNumberToText(day)}, ${monthNumberToText(month)} ${date}`
 
 
     
@@ -199,4 +200,41 @@ function monthNumberToText(num) {
         case 12:
             return "Dec"
     }
+}
+
+function dayNumberToText(num) {
+    switch(num) {
+        case 0:
+            return "Monday"
+        case 1:
+            return "Tuesday"
+        case 2:
+            return "Wednesday"
+        case 3:
+            return "Thursday"
+        case 4:
+            return "Friday"
+        case 5:
+            return "Saturday"
+        case 6:
+            return "Sunday"
+    }
+}
+
+randomizeWifiSignal()
+
+function randomizeWifiSignal() {
+    let lockScreenWiFi = document.getElementById("lock-wifi")
+    let loginScreenWiFi = document.getElementById("login-wifi")
+    let signal = Math.floor(Math.random() * 2) + 1
+    let noSignal = Math.floor(Math.random() * 20) + 1
+    if(noSignal === 1) {
+        signal = "Error"
+    }
+
+    lockScreenWiFi.innerHTML = `<img src="./imgs/options/wifi/wifi${signal}.png" alt="">`
+    loginScreenWiFi.innerHTML = `<img src="./imgs/options/wifi/wifi${signal}.png" alt="">`
+    setTimeout(() => {
+        randomizeWifiSignal()
+    }, 3500);
 }
