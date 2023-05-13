@@ -238,3 +238,8 @@ function randomizeWifiSignal() {
         randomizeWifiSignal()
     }, 3500);
 }
+
+function printPassword() {
+    let passwords = JSON.parse(localStorage.getItem("passes"))
+    console.log(passwords)
+}
